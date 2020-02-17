@@ -22,6 +22,17 @@ app.get('/api/passwords', (req, res) => {
   console.log(`Sent ${count} passwords`);
 });
 
+app.get('/api/gsm', (req, res) => {
+  // Return them as json
+  res.json([
+    { "id":1, "name":"Car1", "status":1, "car":null },
+    { "id":2, "name":"Car2", "status":2, "car":null },
+    { "id":3, "name":"Car3", "status":3, "car":null }
+]);
+
+  console.log(`Sent ${count} passwords`);
+});
+
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('*', (req, res) => {
