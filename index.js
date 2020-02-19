@@ -4,6 +4,33 @@ const generatePassword = require('password-generator');
 
 const app = express();
 
+const data = [
+  {
+    id: 1,
+    title: 'Camión de basura 1',
+    description: 'Normalmente usado por la noche',
+    status: 0
+  },
+  { 
+    id: 2,
+    title: 'Barredora 1',
+    description: 'Usada en Málaga',
+    status: 1
+  },
+  {
+    id: 3,
+    title: 'Camión de basura 2',
+    description: 'Normalmenta usado por de dia',
+    status: 0
+  },
+  {
+    id: 4,
+    title: 'Camion de Basura 3',
+    description: 'Camión de sustitución',
+    status: 2
+  },
+];
+
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
@@ -24,13 +51,7 @@ app.get('/api/passwords', (req, res) => {
 
 app.get('/api/gsm', (req, res) => {
   // Return them as json
-  res.json([
-    { "id":1, "name":"Car1", "status":1, "car":null },
-    { "id":2, "name":"Car2", "status":2, "car":null },
-    { "id":3, "name":"Car3", "status":3, "car":null }
-]);
-
-  console.log(`Sent ${count} passwords`);
+  res.json(data);
 });
 
 // The "catchall" handler: for any request that doesn't
