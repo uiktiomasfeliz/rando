@@ -29,13 +29,12 @@ module.exports = class TruckController {
    * @returns void
    */
   static async addTruck(req, res) {
-
     try {
-      const { status, title, description } = req.body
-      if(!status || !title || !description)
+      const { id, status, title, description } = req.body
+      if(!id || !status || !title || !description)
         res.status(403).end();
 
-      const newTruck = new Truck({ status, title, description })
+      const newTruck = new Truck({ id, status, title, description })
       
       // Let's sanitize inputs
       newTruck.title = sanitizeHtml(newTruck.title);
@@ -47,6 +46,26 @@ module.exports = class TruckController {
 
       const ret = await newTruck.save()
       res.json(ret)
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  }
+
+  
+  /**
+   * Save a truck
+   * @param req
+   * @param res
+   * @returns void
+   */
+  static async editTruck(req, res) {
+    try {
+      const { id, status, title, description } = req.body
+      if(!id || !status || !title || !description)
+        res.status(403).end();
+
+      const editedTruck = await Truck.findOneAndUpdate({ id }, { status, title, description }, { upsert: true, new: true }).exec()
+      res.json(editedTruck)
     } catch (err) {
       res.status(500).send(err);
     }
@@ -76,7 +95,7 @@ module.exports = class TruckController {
    */
   static async deleteTruck(req, res) {
     try {
-      const truck = await Truck.findOne({ id: req.params.id }, { '_id': 0, '_v': 0 }).exec()
+      const truck = await Truck.findOne({ id: req.params.id }).exec()
       const deleted = await truck.remove();
       res.json(deleted);
     } catch (err) {
