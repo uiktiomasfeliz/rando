@@ -10,15 +10,18 @@ class App extends Component {
   state = { data: [] };
 
   // Fetch passwords after first mount
-  componentDidMount() {
-    this.getData();
+  async componentDidMount() {
+    await this.getData();
   }
 
-  getData = () => {
-    // Get the passwords and store them in state
-    fetch('/api/gsm')
-      .then(res => res.json())
-      .then(data => this.setState({ data }));
+  getData = async () => {
+    try {
+      let response = await fetch('/api/trucks');
+      const data = await response.json();
+      this.setState({ data })
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   render() {
