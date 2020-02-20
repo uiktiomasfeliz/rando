@@ -57,7 +57,8 @@ module.exports = class TruckController {
    */
   static async getTruck(req, res) {
     try {
-      const truck = await Truck.findOne({ id: req.params.id }, { '_id': 0, '_v': 0 }).exec()
+      const id = req.params.id || req.query.id;
+      const truck = await Truck.findOne({ id }, { '_id': 0, '_v': 0 }).exec()
       res.json(truck);
     } catch (err) {
       res.status(500).send(err);
