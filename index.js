@@ -14,7 +14,6 @@ DBConfig.init();
 RoutesConfig.init(app);
 
 app.all('/api/*', (req, res, next) => {
-  console.log("entra por aqui!....")
   next();
 });
 
@@ -23,7 +22,6 @@ app.all('/api/*', (req, res, next) => {
 app.get('*', (req, res) => {
   // if (req.url === '/api') return next();
   // else
-  console.log("entra por aqui!....")
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
 
