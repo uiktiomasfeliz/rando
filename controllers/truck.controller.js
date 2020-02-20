@@ -12,7 +12,10 @@ module.exports = class TruckController {
    */
   static async getTrucks(req, res) {
     try {
-      const trucks = await Truck.find({}, { '_id': 0, '_v': 0 }).sort('-dateAdded').exec()
+      const id = req.query.id;
+      const trucks = id ?  
+                    await Truck.findOne({ id }, { '_id': 0, '_v': 0 }).exec() : 
+                    await Truck.find({}, { '_id': 0, '_v': 0 }).sort('-dateAdded').exec()
       res.json(trucks);
     } catch (err) {
       res.status(500).send(err);
@@ -57,7 +60,7 @@ module.exports = class TruckController {
    */
   static async getTruck(req, res) {
     try {
-      const id = req.params.id || req.query.id;
+      const id = req.params.id ;
       const truck = await Truck.findOne({ id }, { '_id': 0, '_v': 0 }).exec()
       res.json(truck);
     } catch (err) {
