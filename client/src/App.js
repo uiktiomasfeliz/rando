@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import { useAsync } from 'react-async';
 import ListCars from './Components/ListCars';
 import DetailCar from "./Components/DetailCar";
@@ -17,15 +17,14 @@ function App() {
   if (isLoading) return "Loading..."
   if (error) return `Something went wrong: ${error.message}`
   if (data)
+    console.log(data);
   return (
     <Router>
       <Switch>
         <Route exact path="/">
           <ListCars listOfCars={data} />
         </Route>
-        <Route name="detail" path="/:idcar">
-          <DetailCar />
-        </Route>
+        <Route name="detail" path="/:idcar" component={DetailCar} />
       </Switch>
     </Router>
   );

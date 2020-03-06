@@ -2,6 +2,21 @@
  * DetailCar css File
 */
 
-.DetailCar {
-    /* propertys here */
+.ant-card-actions > li {
+    margin: 0 !important;
+}
+
+.action-enabled {
+    padding: 12px 0;
+}
+
+.action-disabled {
+    cursor: default;
+    background-color: grey;
+    padding: 12px 0;
+    color: #ccc;
+}
+
+.ant-card-actions > li > span > .anticon:hover {
+    color: rgba(0, 0, 0, 0.45) !important;
 }

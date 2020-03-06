@@ -3,6 +3,10 @@ import { List, Avatar } from "antd";
 import { Link } from "react-router-dom"
 import './ListCars.css';
 
+import { ImgService } from "../../common/img.service";
+
+const imgService = new ImgService();
+
 class ListCars extends Component {
   constructor(props){
     super(props);
@@ -27,28 +31,14 @@ class ListCars extends Component {
       renderItem={item => (
         <List.Item>
           <List.Item.Meta
-            avatar={<Avatar src={`./icons/${getImgName(item.status)}.png`} />}
-            title={<Link to="/detail" params={{ idcar: "hello" }}>{item.title}</Link>}
+            avatar={<Avatar src={`./icons/${imgService.getImgName(item.status)}.png`} />}
+            title={<Link to={`/${item.id}`}>{item.title}</Link>}
             description={item.description}
           />
         </List.Item>
       )}
     />
     );
-  }
-}
-
-function getImgName (status) {
-  switch (status) {
-    case 0:
-      return "stop-red"
-    case 1:
-      return "warning-yelow"
-    case 2:
-      return "check-green"
-
-    default:
-      break;
   }
 }
 
